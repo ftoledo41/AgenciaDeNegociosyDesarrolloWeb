@@ -1,0 +1,56 @@
+/* */
+
+.layout__clients{
+  /* con esto, el position:absolute en .client-shapes__item queda dentro, no tendra como limite toda la pagina si no que la caja que contiene el elemento con position absoluta */
+  position: relative;
+  z-index: 1;
+  padding-bottom: 10rem;
+}
+
+.clients__header{
+    text-align: left;
+}
+
+.clients__title{
+  /* con esto queda el texto en dos lineas */
+  width: 50%;
+  line-height: 1.2;
+  font-weight: 500;
+}
+
+.clients__description{
+  text-align: left;
+  width: 40%;
+  margin: 0;
+  margin-bottom: 6rem;
+}
+
+.clients__logos{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 3rem;
+}
+
+.clients__item{
+  width: calc(25% - 3rem);
+}
+
+.clients__img{
+  filter: grayscale(100%);
+  opacity: 0.3;
+  transition: all 300ms ease-in-out;
+}
+
+.clients__item:hover > .clients__img{
+  filter: grayscale(0);
+  opacity: 1;
+  cursor: pointer;
+}
+
+.client-shapes__item{
+  position: absolute;
+  z-index: -1;
+  top:10rem;
+  right: 0;
+}

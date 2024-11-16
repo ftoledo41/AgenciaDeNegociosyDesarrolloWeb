@@ -1,0 +1,894 @@
+/* VARIABLES */
+:root {
+  --mx-width: 1320px;
+  --color-text-body: #525260;
+  --color-primary: #5956e9;
+  --color-secondary: #fff;
+  --color-banner: #2522ba;
+  --color-text-btn: #0b6efd;
+  --color-bg-btn: #ffdc60;
+  --color-subtitle: #c75c6f;
+  --color-title: #292930;
+  --color-bg-services: #f8f8f8;
+  --color-bg-projects: #ecf2f6;
+  --color-bg-dark: #27272e;
+  --color-text-decription: #99a1aa;
+  --color-hover-dark: #303035;
+  --color-bordes: #e3e6e9;
+}
+
+/* ESTILOS GENERALES */
+html {
+  font-size: 62.5%; /*Equivalente a 10px*/
+  /* OCULTAR LO QUE SOBRESALGA DEL EJE X */
+  overflow-x: hidden;
+}
+
+body {
+  width: 100%;
+  height: 100%;
+
+  font-size: 1.6rem;
+  font-family: "DM Sans", sans-serif;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--color-text-body);
+}
+
+/* ESTRUCTURA SIN FLEXBOX*/
+.layout {
+  width: 100%;
+  /* Mientras mas valor de pixel mas se pierde el contenido a la derecha */
+  min-width: 1200px;
+  /* No es necesario colocarlo ya que se adapta al contenido, pero se agrega para no olvidar*/
+  height: 100%;
+}
+
+/* ESTILOS MENU NAVEGAION Y CABECERA DE LA WEB */
+.layout__menu {
+  width: 100%;
+  padding: 3.5rem 3rem;
+}
+
+.menu__navbar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.menu__navbar--fixed {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 9;
+  background-color: var(--color-secondary);
+  box-shadow: 0px 2px 10px 0 rgba(0, 0, 0, 10%);
+  padding: 1.5rem 8rem;
+}
+
+.navbar__logo {
+  width: 187px;
+}
+
+.nav__list {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.nav__item {
+  /* Para poder agregar seudoelementos como after o before */
+  position: relative;
+  margin: 0 2.4rem;
+}
+
+.nav__title {
+  position: relative;
+
+  /* elemento en linea, pero de todas maneras se puede manipular en bloque */
+  display: inline-block;
+
+  line-height: 6rem;
+
+  font-weight: 500;
+  color: var(--color-text-body);
+
+  /* pequeña aceleracion al hacer el hover */
+  transition: all 300ms ease-in-out;
+}
+
+.nav__icon {
+  font-size: 1rem;
+  font-weight: bold;
+  padding-left: 0.2rem;
+  vertical-align: middle;
+}
+
+.nav__title:hover {
+  color: var(--color-primary);
+}
+
+.nav__title::before {
+  content: "";
+  height: 0.2rem;
+  width: 0;
+  background-color: var(--color-primary);
+  position: absolute;
+  bottom: 1.2rem;
+  left: 0;
+  opacity: 0;
+  transition: 500ms;
+}
+
+/* la linea aparece bajo las opciones del menu */
+.nav__title:hover::before {
+  width: 100%;
+  opacity: 1;
+}
+
+/* mostramos el menu */
+.nav__submenu {
+  display: block;
+  position: absolute;
+  top: 100%;
+  left: 2rem;
+  min-width: 19rem;
+  padding: 1.5rem 1rem;
+  border-radius: 4px;
+
+  background-color: var(--color-secondary);
+  box-shadow: 0px 13px 48px 0 rgba(0, 0, 0, 15%);
+
+  /* Para la animacion en .nav__item:hover>.nav__submenu */
+  opacity: 0;
+  visibility: hidden;
+  transition: all 100ms ease-in-out;
+}
+
+/* animacion con transition y transition-delay */
+.submenu__item {
+  opacity: 0;
+  transform: translateX(2rem);
+  transition: all 300ms ease-in-out;
+}
+
+.submenu__item:nth-child(1) {
+  transition-delay: 100ms;
+}
+
+.submenu__item:nth-child(2) {
+  transition-delay: 200ms;
+}
+.submenu__item:nth-child(3) {
+  transition-delay: 300ms;
+}
+.submenu__item:nth-child(4) {
+  transition-delay: 400ms;
+}
+.submenu__item:nth-child(5) {
+  transition-delay: 500ms;
+}
+.submenu__item:nth-child(6) {
+  transition-delay: 600ms;
+}
+
+.submenu__title {
+  display: block;
+  /* para que esten dentro de los limites del elemento que lo contiene */
+  position: relative;
+
+  font-size: 1.5rem;
+  text-transform: capitalize;
+  text-decoration: none;
+  font-weight: 500;
+  color: var(--color-text-body);
+  padding: 0.7rem 1.5rem;
+  transition: all 300ms ease-in-out;
+}
+
+.nav__item:hover > .nav__submenu {
+  opacity: 1;
+  visibility: visible;
+  z-index: 999;
+  left: 0;
+}
+
+.nav__item:hover .submenu__item {
+  opacity: 1;
+  /* lo trasladamos a 0 ya que los trasaladamos a 2 en  .submenu__item*/
+  transform: translateX(0);
+}
+
+.submenu__title:hover {
+  color: var(--color-primary);
+}
+
+.submenu__title::after {
+  content: "";
+  height: 0.1rem;
+  width: 0;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transition: all 300ms ease-in-out;
+  background-color: var(--color-primary);
+}
+
+.submenu__title:hover::after {
+  width: 100%;
+}
+
+/* ESTILOS PARA EL BANNER */
+.layout__banner {
+  /* por utilizar elementos con posisciones absolutas */
+  position: relative;
+  min-height: 60rem;
+  margin: 0 3rem;
+  /* Lo mismo que arriba */
+  /* width: calc(100% - 6rem);
+  margin: 0 auto; */
+
+  padding-right: 0;
+  padding-left: 10rem;
+  padding-top: 15rem;
+  padding-bottom: 20rem;
+  border-radius: 60px;
+  overflow: hidden;
+  background-color: var(--color-banner);
+  z-index: 1;
+}
+
+.banner__content {
+  position: relative;
+  display: inline-block;
+  width: 50%;
+  padding: 0 1.5rem;
+  /* z-index solo funciona con position: relative */
+  z-index: 3;
+}
+
+.banner__title {
+  font-size: 8rem;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--color-secondary);
+  margin-bottom: 3rem;
+}
+
+.banner__btn {
+  display: inline-block;
+  padding: 2.8rem 4.5rem;
+  border-radius: 20px;
+  background-color: var(--color-secondary);
+  color: var(--color-text-btn);
+  font-size: 1.7rem;
+  font-weight: bold;
+  text-transform: capitalize;
+  text-align: center;
+  box-shadow: 0px 45px 80px -25px var(--color-primary);
+  transition: all 300ms ease-in-out;
+}
+
+.banner__btn:hover {
+  background-color: var(--color-bg-btn);
+  color: var(--color-text-body);
+}
+
+.shapes__item {
+  position: absolute;
+  /* por detras del z-index 0 */
+  z-index: 2;
+  /* para no dar clic a la imagen y arrastrala con el mouse*/
+  pointer-events: none;
+}
+
+/* Posicionamos las imagenes */
+.shapes__item--shape1 {
+  top: 0;
+  right: 0;
+  text-align: right;
+
+  animation-name: showRight;
+  animation-duration: 1s;
+}
+
+@keyframes showRight {
+  /* 0 segundo */
+  0% {
+    transform: translateX(50%);
+  }
+  /* segundo */
+  100% {
+    transform: translateX(0%);
+  }
+}
+
+.shapes__item--shape2 {
+  bottom: 0;
+  left: 0;
+
+  animation-name: showLeft;
+  animation-duration: 1s;
+}
+
+@keyframes showLeft {
+  /* 0 segundo */
+  0% {
+    transform: translateX(-50%);
+  }
+  /* segundo */
+  100% {
+    transform: translateX(0%);
+  }
+}
+
+.shapes__item--shape3 {
+  top: 34%;
+  left: 50%;
+
+  animation: moveShape3 20s infinite;
+}
+
+@keyframes moveShape3 {
+  0% {
+    transform: translateX(0) translateY(0);
+  }
+  40% {
+    transform: translateX(50px) translateY(-200px);
+  }
+  75% {
+    transform: translateX(800px);
+  }
+  100% {
+    transform: translateX(0) translateY(0);
+  }
+}
+
+.shapes__item--shape4 {
+  bottom: 24rem;
+  left: 45%;
+
+  animation: moveShape4 30s infinite;
+}
+
+@keyframes moveShape4 {
+  0% {
+    transform: translateX(0) translateY(0);
+  }
+  40% {
+    transform: translateX(-50px) translateY(200px);
+  }
+  75% {
+    transform: translateX(-500px);
+  }
+  100% {
+    transform: translateX(0) translateY(0);
+  }
+}
+
+.shapes__item--shape4 .shapes__img {
+  opacity: 0.5;
+  width: 7.5rem;
+}
+
+.shapes__item--shape5 {
+  bottom: 12rem;
+  left: 53%;
+  opacity: 0.7;
+
+  animation: moveShape5 45s infinite;
+}
+
+@keyframes moveShape5 {
+  0% {
+    transform: translateX(0) translateY(0);
+  }
+  40% {
+    transform: translateX(-600px) translateY(-500px);
+  }
+  75% {
+    transform: translateX(30px) translateY(-800px);
+  }
+  100% {
+    transform: translateX(0) translateY(0);
+  }
+}
+
+.shapes__item--shape6 {
+  bottom: 10rem;
+  left: 40%;
+
+  animation: moveShape3 35s infinite;
+}
+
+.shapes__item--shape7 {
+  top: 0;
+  right: 10rem;
+  z-index: 1;
+
+  animation-name: showTop;
+  animation-duration: 1s;
+}
+
+@keyframes showTop {
+  /* 0 segundo */
+  0% {
+    transform: translateY(-50%);
+  }
+  /* segundo */
+  100% {
+    transform: translateY(0%);
+  }
+}
+
+/* ESTILOS SECCION SERVICIOS */
+.layout__services {
+  position: relative;
+  margin: 14rem 10rem;
+  margin-bottom: 8rem;
+  z-index: 1;
+}
+
+.services__grid {
+  max-width: var(--mx-width);
+  margin: 0 auto;
+}
+
+.services__header {
+  margin-bottom: 2rem;
+  text-align: left;
+}
+
+.proyects__subtitle,
+.services__subtitle,
+.stats__subtitle,
+.reviews__subtitle,
+.clients__subtitle,
+.news__subtitle {
+  font-size: 2rem;
+  font-weight: 500;
+  color: var(--color-subtitle);
+  margin-bottom: 1.5rem;
+}
+
+.services__title,
+.services__title,
+.stats__title,
+.reviews__title,
+.news__title {
+  font-size: 6.7rem;
+  font-weight: 500;
+  line-height: 1.2;
+  color: var(--color-title);
+}
+
+.services__list {
+  display: flex;
+  flex-direction: row;
+  gap: 3rem;
+}
+
+.services__service {
+  width: 33%;
+  height: 100%;
+  padding: 5rem 4rem;
+  margin-bottom: 4rem;
+  border-radius: 3rem;
+
+  /* el degradado se logra con el color en rgba */
+  background: linear-gradient(
+    180deg,
+    var(--color-bg-services),
+    rgba(255, 255, 255, 0)
+  );
+  background-color: var(--color-secondary);
+
+  border: 1px solid;
+  border-image-source: linear-gradient(
+    90deg,
+    var(--color-bg-services),
+    rgba(255, 255, 255, 0)
+  );
+
+  /* 158 */
+  transition: all 300ms ease-in-out;
+  display: flex;
+  flex-direction: row;
+}
+
+/* 158 */
+.services__service:hover {
+  background-color: var(--color-bg-services);
+}
+
+.service__contanier-img {
+  margin-right: 2.5rem;
+  max-width: 8.5rem;
+  flex: 1;
+}
+
+.service__content {
+  flex: 1;
+}
+
+.service__title {
+  color: var(--color-title);
+  font-size: 2.4rem;
+  font-weight: 500;
+  line-height: 1.4;
+  margin-bottom: 3rem;
+  transition: all 300ms ease-in-out;
+}
+
+.service__description {
+  font-size: 1.7rem;
+  overflow: hidden;
+  margin-bottom: 4rem;
+}
+
+.service__more {
+  font-size: 1.7rem;
+  position: relative;
+  display: inline-block;
+  font-weight: 500;
+  padding-left: 5rem;
+  transition: all 300ms ease-in-out;
+}
+
+.service__more::before {
+  content: "";
+  width: 3.4rem;
+  height: 1.5px;
+  background-color: var(--color-text-body);
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transition: all 300ms ease-in-out;
+}
+
+.service__more:hover,
+.service__title:hover {
+  color: var(--color-primary);
+}
+
+.service__more:hover::before {
+  background-color: var(--color-primary);
+}
+
+/* ESCALONADO DE LAS TARJETAS DE SERVICIO */
+.services__service--bottom {
+  margin-top: 20rem;
+}
+
+.services__service--middle {
+  margin-top: 10rem;
+}
+
+.services__service--top {
+  margin-top: 0rem;
+}
+
+/* Formas detras de los servicios */
+.services-shapes__item {
+  position: absolute;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.services-shapes--shape1 {
+  top: -7%;
+  right: 7%;
+}
+
+.services-shapes--shape2 {
+  top: 10%;
+  left: 52%;
+}
+
+.services-shapes--shape3 {
+  top: 34%;
+  left: 5%;
+}
+/* ESTILOS DE PROYECTOS */
+
+.layout__proyects {
+  position: relative;
+  background-color: var(--color-bg-projects);
+  /* aqui posicionamos la caja */
+  padding: 14rem 10rem;
+  z-index: 1;
+}
+
+.proyects__grid {
+  max-width: var(--mx-width);
+  /* Tiene sentido cuando esta configurado el width, pero lo dejamos de todas maneras */
+  margin: 0 auto;
+}
+
+.proyects__header {
+  margin-bottom: 4rem;
+}
+
+.proyects__subtitle {
+  transform: capitalize;
+}
+
+.proyects__categories {
+  display: flex;
+  flex-direction: row;
+  gap: 7rem;
+  margin-bottom: 5.5rem;
+}
+
+/* estilos a cada categoria */
+.categories__item {
+  position: relative;
+  font-size: 2rem;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 0.8rem 0;
+  transition: all 150ms ease-in-out;
+}
+
+.categories__item-active,
+.categories__item:hover {
+  border-bottom: 3px solid var(--color-primary);
+}
+
+.proyects__all {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  /* separacion abajo arriba - separacion derecha izquierda */
+  gap: 4rem 7rem;
+}
+
+.proyects__proyect {
+  width: calc(50% - 3.5rem);
+}
+
+.proyect__container-img {
+  width: 100%;
+  /*cambiamos de 3rem a 30px por el border-radius en proyect__content para que el borde no aumente, no se desforme   */
+  border-radius: 30px 30px 0 0;
+  /* para que se redonde el borde */
+  /* tambien conseguimos que si la imagen supera el tamaño del contenedor, se oculte la imagen*/
+  overflow: hidden;
+}
+
+.proyect_img {
+  width: 100%;
+  transition: all 800ms ease-in-out;
+}
+
+.proyects__proyect:hover .proyect_img {
+  transform: scale(1.2);
+}
+
+.proyect__content {
+  padding: 4rem 5rem;
+  background-color: var(--color-secondary);
+  border-radius: 0 0 30px 30px;
+}
+
+.proyect__title {
+  font-size: 3.2rem;
+  font-weight: 500;
+  line-height: 1.2;
+  color: var(--color-title);
+  margin-bottom: 1rem;
+  transition: all 300ms ease-in-out;
+}
+
+.proyect__title:hover {
+  color: var(--color-banner);
+}
+
+.proyect__tags {
+  font-size: 1.7rem;
+}
+
+.proyect-shapes__item {
+  position: absolute;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.proyect-shapes--shape1 {
+  top: 2%;
+  right: 5%;
+}
+
+.proyect-shapes--shape2 {
+  top: 8%;
+  right: 35%;
+}
+
+.proyect-shapes--shape3 {
+  top: 38%;
+  left: 5%;
+}
+
+
+/* NAVEGACION RESPONSIVE */
+
+.navbar__mobile-btn {
+  display: none;
+}
+
+.mobile-btn__wrap {
+  height: 5rem;
+  width: 5rem;
+  background-color: var(--color-text-body);
+  border: none;
+  /* se convierte en una esfera */
+  border-radius: 3.2rem;
+
+  transition: all 300ms ease-in-out;
+
+  /* para las lineas */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+}
+
+.mobile-btn__line {
+  height: 0.2rem;
+  width: 2rem;
+  background-color: var(--color-secondary);
+
+  /* Se saparan las lineas */
+  margin-bottom: 0.4rem;
+
+  border-radius: 1rem;
+  transition: all 300ms ease-in-out;
+}
+
+.mobile-btn__line:last-child {
+  margin-bottom: 0;
+  width: 1rem;
+  margin-right: -1rem;
+}
+
+.menu-mobile {
+  visibility: hidden;
+  opacity: 0;
+
+  /* para que nos acompañe aunque bajemos o subamos con el scrroll */
+  position: fixed;
+
+  top: 0;
+  left: -300px;
+
+  /* para ponerlo sobre cualquier ccosa */
+  z-index: 10;
+
+  width: 30rem;
+  height: 100%;
+  background-color: var(--color-secondary);
+  padding: 5rem 1rem;
+  padding-top: 0;
+  /* 85px mas sombra mas difusa */
+  /* -35px compresion de la sobra */
+  box-shadow: 0px 0px 85px -35px rgba(0, 0, 0, 0.5);
+
+  /* para el scrool por y si algo se sale */
+  overflow-y: auto;
+
+  transition: all 500ms cubic-bezier(0.077, 0.2, 0.05, 1);
+}
+
+.menu-mobile--show {
+  visibility: visible;
+  opacity: 1;
+  left: 0;
+}
+
+.menu-mobile__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0rem 1rem;
+  padding: 2rem 0rem;
+  border-bottom: 1px solid var(--color-borders);
+}
+
+.menu-mobile__container-logo {
+  width: 15rem;
+}
+
+.menu-mobile__close {
+  background-color: transparent;
+  height: 3rem;
+  width: 3rem;
+  border: 2px solid var(--color-text-description);
+  border-radius: 1rem;
+  color: var(--color-text-body);
+  font-size: 1.6rem;
+  cursor: pointer;
+}
+
+.menu-mobile__list {
+  display: block;
+  height: 100%;
+  overflow: auto;
+}
+
+.menu-mobile__item {
+  position: relative;
+  border-bottom: 1px solid var(--color-borders);
+  margin: 0 1rem;
+}
+
+.menu-mobile__link {
+  position: relative;
+  height: 5rem;
+  line-height: 5rem;
+  color: var(--color-text-body);
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.menu-mobile__icon {
+  font-size: 1.4rem;
+}
+
+.menu-mobile__submenu-mobile {
+  display: none;
+  visibility: visible;
+  opacity: 1;
+
+  min-width: 100%;
+  padding: 0;
+  padding-bottom: 1rem;
+}
+
+.submenu-mobile__link {
+  display: block;
+  text-decoration: none;
+
+  position: relative;
+  padding: 0.7rem 1rem;
+  font-size: 1.5rem;
+  text-transform: capitalize;
+  font-weight: 500;
+  color: var(--color-text-body);
+}
+
+/* ESTILOS BOTON MODO OSCURO */
+.switcher {
+    position: fixed;
+    top: 20rem;
+    left: 0;
+    background-color: var(--color-primary);
+    border-radius: 0 3rem 3rem 0;
+    padding: 1rem;
+    z-index: 5;
+}
+
+.switcher__btn {
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  display: flex;
+}
+
+.switcher__icon-light,
+.switcher__icon-dark {
+  color: var(--color-secondary);
+  font-size: 1.8rem;
+  height: 4rem;
+  width: 3rem;
+  line-height: 3.6rem;
+}
+
+.switcher__icon-dark {
+  display: none;
+}

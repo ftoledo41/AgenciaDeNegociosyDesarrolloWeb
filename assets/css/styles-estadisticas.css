@@ -1,0 +1,83 @@
+.layout__stats,
+.layout__clients {
+  background-color: var(--color-bg-dark);
+  padding: 14rem 10rem;
+  /* color: var(--color-secondary); */
+}
+
+.stats__container,
+.clients__container {
+  max-width: var(--mx-width);
+  margin: 0 auto;
+}
+
+.stats__header {
+  text-align: center;
+}
+
+.stats__title,
+.clients__title {
+  color: var(--color-secondary);
+  font-size: 6.4rem;
+  margin-bottom: 3rem;
+}
+
+.stats__description,
+.clients__description {
+  font-size: 2rem;
+  /* porque es mas pequeño, no es el total de la caja*/
+  width: 60%;
+  /* pocisionamos al medio */
+  margin: 0 auto;
+  margin-bottom: 4rem;
+  color: var(--color-text-decription);
+}
+
+.stats__progress {
+  display: flex;
+  flex-direction: row;
+  gap: 4rem;
+}
+
+.stats__stat{
+  width: 25%;
+  text-align: center;
+  padding: 7rem 2rem;
+  border-radius: 2rem;
+  border: 1px solid transparent;
+}
+
+.stats__stat:hover{
+  background: linear-gradient(180deg, var(--color-bg-dark), var(--color-hover-dark));
+  border: 1px solid var(--color-hover-dark);
+}
+
+.stat__icon{
+  margin-bottom: 2rem;
+}
+
+.stat__icon>img{
+  margin: 0 auto;
+  text-align: center;
+}
+
+.stat_count{
+  /* como es de linea, lo pasamo a bloque para poder modifciar los margenes */
+  display: inline-block;
+  font-size: 6.4rem;
+  font-weight: 500;
+  line-height: 1.2;
+  color: var(--color-primary);
+  margin-bottom: 0.5rem;
+  text-align: center;
+
+}
+
+.stat__title{  
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--color-secondary);
+  
+}
